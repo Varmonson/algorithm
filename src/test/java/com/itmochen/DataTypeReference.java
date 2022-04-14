@@ -1,5 +1,8 @@
-package com.itmochen.leetcode.num;
+package com.itmochen;
 
+/**
+ * 数据类型引用（值引用/对象引用）
+ */
 public class DataTypeReference {
 
     private Integer count = 10;
@@ -23,6 +26,8 @@ public class DataTypeReference {
     public static void main(String[] args) {
         int n = 10;
         Integer n1 = 10;
+
+        // 基础类型值引用
         DataTypeReference dataTypeReference = new DataTypeReference();
         int res = dataTypeReference.increment(n);
         System.out.println(res);
@@ -36,6 +41,7 @@ public class DataTypeReference {
         dataTypeReference.increment();
         System.out.println(dataTypeReference.getCount());
 
+        // 对象
         DataTypeReference dataTypeReference2 = dataTypeReference;
         dataTypeReference2.increment();
         System.out.println(dataTypeReference2.getCount());
