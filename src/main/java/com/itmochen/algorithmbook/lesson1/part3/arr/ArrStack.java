@@ -1,6 +1,8 @@
 package com.itmochen.algorithmbook.lesson1.part3.arr;
 
+
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.StringJoiner;
 
 /**
@@ -9,7 +11,7 @@ import java.util.StringJoiner;
  * @date 2022/4/19 10:58
  * @return
  */
-public class ArrStack<T> {
+public class ArrStack<T> implements Iterable<T> {
 
     private T[] stack;
 
@@ -39,13 +41,12 @@ public class ArrStack<T> {
      * @return T
      */
     public T pop() {
-        // 队列为空
+        // 栈为空
         if (isEmpty()) return null;
-        size--;
-        T t = stack[size];
+        T t = stack[--size];
         // 防止对象游离
         stack[size] = null;
-        if (stack.length / 4 > size) resize(stack.length / 2);
+        if (size > 0 && stack.length / 4 == size) resize(stack.length / 2);
         return t;
     }
 
@@ -74,12 +75,43 @@ public class ArrStack<T> {
         return size == 0;
     }
 
+    /**
+     * 获取大小
+     * @author fan
+     * @date 2022/4/19 20:34
+     * @return java.lang.Integer
+     */
+    public Integer size() {
+        return size;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", ArrStack.class.getSimpleName() + "[", "]")
                 .add("stack=" + Arrays.toString(stack))
                 .add("size=" + size)
                 .toString();
+    }
+
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrIterator();
+    }
+
+    private class ArrIterator implements Iterator<T> {
+
+        private Integer i = size;
+
+        @Override
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        @Override
+        public T next() {
+            return stack[--i];
+        }
     }
 
     public static void main(String[] args) {
@@ -91,6 +123,13 @@ public class ArrStack<T> {
         stack.push(10);
         System.out.println(stack);
         System.out.println("=====================================");
+
+        Iterator<Integer> arrIterator = stack.iterator();
+        while (arrIterator.hasNext()) {
+            Integer item = arrIterator.next();
+            System.out.print(item + " ");
+        }
+        System.out.println("==========================");
 
         Integer ele1 = stack.pop();
         System.out.println("ele1:" + ele1);

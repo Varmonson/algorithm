@@ -1,6 +1,7 @@
 package com.itmochen.algorithmbook.lesson1.part3.arr;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * 数组实现Bag
@@ -9,7 +10,7 @@ import java.util.Arrays;
  * @Date: 2022/4/11 16:40
  * @Version: 1.0
  **/
-public class ArrBag<T> {
+public class ArrBag<T> implements Iterable<T>{
 
     /**
      * 泛型集合
@@ -59,6 +60,42 @@ public class ArrBag<T> {
         return size == 0;
     }
 
+    /**
+     * 获取大小
+     * @author fan
+     * @date 2022/4/19 20:34
+     * @return java.lang.Integer
+     */
+    public Integer size() {
+        return size;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrIterator();
+    }
+
+    /**
+     *  迭代器
+     * @author fan
+     * @date 2022/4/19 21:15
+     * @return
+     */
+    private class ArrIterator implements Iterator<T> {
+
+        private Integer i = size;
+
+        @Override
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        @Override
+        public T next() {
+            return items[--i];
+        }
+    }
+
     @Override
     public String toString() {
         return "ArrBag{" +
@@ -77,6 +114,14 @@ public class ArrBag<T> {
         bag.add("!");
         System.out.println(bag);
 
+        System.out.println("====================");
+
+        Iterator<String> iterator = bag.iterator();
+        while (iterator.hasNext()) {
+            String item = iterator.next();
+            System.out.print(item + " ");
+        }
+        System.out.println();
     }
 
 }
