@@ -49,6 +49,16 @@ public class ArrBag<T> {
         items = temp;
     }
 
+    /**
+     * 判断是否为空
+     * @author fan
+     * @date 2022/4/19 20:24
+     * @return boolean
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     @Override
     public String toString() {
         return "ArrBag{" +

@@ -39,6 +39,8 @@ public class ArrStack<T> {
      * @return T
      */
     public T pop() {
+        // 队列为空
+        if (isEmpty()) return null;
         size--;
         T t = stack[size];
         // 防止对象游离
@@ -53,13 +55,23 @@ public class ArrStack<T> {
      * @date 2022/4/19 11:06
      * @return void
      */
-    public void resize(Integer newSize) {
+    private void resize(Integer newSize) {
         System.out.println("stack resize, before capacity:" + stack.length + ", after capacity:" + newSize);
         T[] temp = (T[]) new Object[newSize];
         for (int i = 0; i < size; i++) {
             temp[i] = stack[i];
         }
         stack = temp;
+    }
+
+    /**
+     * 判断是否为空
+     * @author fan
+     * @date 2022/4/19 20:25
+     * @return boolean
+     */
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     @Override
@@ -81,13 +93,21 @@ public class ArrStack<T> {
         System.out.println("=====================================");
 
         Integer ele1 = stack.pop();
-        System.out.println(ele1);
+        System.out.println("ele1:" + ele1);
         Integer ele2 = stack.pop();
-        System.out.println(ele2);
+        System.out.println("ele2:" + ele2);
         Integer ele3 = stack.pop();
-        System.out.println(ele3);
+        System.out.println("ele3:" + ele3);
         Integer ele4 = stack.pop();
-        System.out.println(ele4);
+        System.out.println("ele4:" + ele4);
         System.out.println(stack);
+        Integer ele5 = stack.pop();
+        System.out.println("ele5:" + ele5);
+        Integer ele6 = stack.pop();
+        System.out.println("ele6:" + ele6);
+        Integer ele7 = stack.pop();
+        System.out.println("ele7:" + ele7);
+        System.out.println(stack);
+
     }
 }
