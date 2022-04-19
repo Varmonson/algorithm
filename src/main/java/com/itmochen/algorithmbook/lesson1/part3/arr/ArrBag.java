@@ -39,11 +39,11 @@ public class ArrBag<T> {
     /**
      * 扩容
      */
-    private void resize(int size) {
+    private void resize(int newSize) {
         // 创建新数组
-        T[] temp = (T[]) new Object[size];
+        T[] temp = (T[]) new Object[newSize];
         // 拷贝元素
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < size; i++) {
             temp[i] = items[i];
         }
         items = temp;
